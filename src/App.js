@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Component } from "react";
+import Navbar from'./components/Navbar';
+import  './components/Navbar.css';
+import './components/QuoteCard.css';
+import QuoteCard from'./components/QuoteCard';
 
-
-function App() {
-  return (
-    <div className="App">
-      
+class App extends Component {
+  render() {
+    return(
+      <div className="App">
+      <Navbar />
+      <QuoteCard />
     </div>
-  );
+    )
+  }
 }
 
 export default App;
+
+
