@@ -1,0 +1,1 @@
+/* to generate a display, using the following properties :nameavatar for the imageonline, Boolean which will be used to display, depending on its value:the text online or offlinethe small green or red status indicator */
