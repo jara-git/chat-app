@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Contact from './components/Contact';
+
+class App extends Component {
+
+  state = {
+    contacts: 
+    [
+      {
+      name: 'Nemo',
+      image: 'https://randomuser.me/api/portraits/lego/1.jpg',
+      connected: false
+      },
+      {
+      name: 'Diana',
+      image: 'https://randomuser.me/api/portraits/lego/2.jpg',
+      connected: true
+      },
+      {
+      name: 'Oxmo',
+      image: 'https://randomuser.me/api/portraits/lego/4.jpg',
+      connected: false
+      }
+    ]
+  }
+
+  checkForStatus(person){
+    return (
+      person.connected
+      ? <Contact name={person.name} image={person.image} onlineStatus/>
+      : <Contact name={person.name} image={person.image} />
+    )
+  }
+
+  render(){
+    return (
+      <div className="App">
+        {this.checkForStatus(this.state.contacts[0])}
+        {this.checkForStatus(this.state.contacts[1])}
+        {this.checkForStatus(this.state.contacts[2])}
+      </div>
+    );    
+  }
 }
 
 export default App;
