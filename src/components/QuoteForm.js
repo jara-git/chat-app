@@ -13,6 +13,7 @@ class QuoteForm extends Component {
   }
 
   handleSubmit(event) {
+      // to prevent a browser reload/refresh.
     event.preventDefault();
   }
 
