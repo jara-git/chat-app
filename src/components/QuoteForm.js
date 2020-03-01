@@ -1,68 +1,61 @@
-import React ,{ Component } from 'react';
-import QuoteCard from './QuoteCard';
+import React, { Component } from 'react';
 import './QuoteForm.css';
 
+const MAX_LENGTH = 30; // You can change the value
+
 class QuoteForm extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        character: '',
-        image: '',
-        quote: '',
-        display: false,
-      };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleChange(event) {
-      const name = event.target.name;
-      const value = event.target.value;
-      const stateUpdate = {};
-      stateUpdate[name] = value;
-      this.setState(stateUpdate);
-    }
-    handleSubmit(event) {
-      event.preventDefault();
-      this.setState({ display: true });
-    }
-    render() {
-      return (
-        <>
-        <form className="QuoteForm" onSubmit={this.handleSubmit}>
-          <h3>New quote</h3>
-          <label htmlFor="character">Character</label>
-          <input
-            id="name"
-            name="character"
-            type="text"
-            onChange={this.handleChange}
-          />
-          <label htmlFor="image">Image</label>
-          <input
-            id="name"
-            name="image"
-            type="text"
-            onChange={this.handleChange}
-          />
-          <label htmlFor="quote">Quote</label>
-          <textarea
-            id="name"
-            name="quote"
-            type="text"
-            onChange={this.handleChange}
-          />
-          <button type="submit">Add quote</button>
-        </form>
-        {this.state.display && (
-            <QuoteCard
-              character={this.state.character}
-              image={this.state.image}
-              quote={this.state.quote}
-            />
-          )}
-        </>
-      );
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      character: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
-  
-  export default QuoteForm;
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  handleChange(event) {
+    // SOLUTION to limit the input to 30 characters: if the new value
+    // (event.target.value) is LONGER than the maximum, return from the function
+    if (event.target.value.length > MAX_LENGTH) {
+      return;
+    }
+    this.setState({ character: event.target.value });
+  }
+
+      
+      render() {
+        // SOLUTION for border conditional color. Compute a BOOLEAN
+        // telling if we've reached the maximum, and use it in input's className
+        const maximumReached = this.state.character.length >= MAX_LENGTH;
+    
+        // SOLUTION for displaying the number of remaining characters
+        // We compute it here and use it below
+        const numRemaining = MAX_LENGTH - this.state.character.length;
+        return (
+          <form className="QuoteForm" onSubmit={this.handleSubmit}>
+            <label htmlFor="character">Character:</label>
+            {/* show a class or another depending on maximumReached */}
+            <input
+              className={maximumReached ? 'length-maximum-reached' : 'length-ok'}
+              id="name"
+              name="character"
+              type="text"
+              value={this.state.character}
+              onChange={this.handleChange}
+            />
+            <small className="remaining-characters">
+              {numRemaining} remaining characters
+            </small>
+            <p>
+              You typed: <strong>{this.state.character}</strong>
+            </p>
+          </form>
+        );
+      }
+    }
+    
+    export default QuoteForm;
+    

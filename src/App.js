@@ -7,6 +7,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      <QuoteForm />
       <QuoteList/>
 
       {/* <QuoteCard
@@ -26,7 +27,7 @@ function App() {
         character="Ralph Wiggun"
         image="https://upload.wikimedia.org/wikipedia/en/1/14/Ralph_Wiggum.png" alt="Ralph Wiggun"
       /> */}
-      <QuoteForm />
+      
       
     </div>
   );
