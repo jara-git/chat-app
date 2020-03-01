@@ -11,6 +11,7 @@ insert, in these tags: a link (for example to the Simpsons' Wikipedia page) or a
 export your component, in the same way as in App.js. */
 
 import React from 'react';
+import  './Navbar.css'
 
 const Nav = () => {
   return (
